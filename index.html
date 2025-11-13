@@ -5,48 +5,63 @@
     <title>CRM con IndexedDB - Proyecto para alumnos</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 2em; }
-        input, button { padding: 0.5em; margin: 0.2em 0; width: 100%; }
+        form { background: #f4f4f4; padding: 1em; border-radius: 8px; margin-bottom: 2em; }
+        input, button { padding: 0.5em; margin: 0.2em 0; width: 100%; box-sizing: border-box; }
         input:focus { border-color: blue; outline: none; background: #e7f0ff; }
-        /* Implementar estilos para campos válidos e inválidos */
-        /* .valid { border-color: green; background: #e6ffe6; } */
-        /* .invalid { border-color: red; background: #ffe6e6; } */
+
+        /* --- ESTILOS DE VALIDACIÓN IMPLEMENTADOS --- */
+        .valid { border-color: green; background: #e6ffe6; }
+        .invalid { border-color: red; background: #ffe6e6; }
+
+        button#add-btn { background: #007bff; color: white; border: none; cursor: pointer; }
+        button#add-btn:hover { background: #0056b3; }
         button:disabled { background: #ccc; cursor: not-allowed; }
+
+        button#cancel-btn { background: #6c757d; color: white; border: none; cursor: pointer; }
+        button#cancel-btn:hover { background: #5a6268; }
+
         ul { list-style: none; padding: 0; }
         li { padding: 0.5em; border-bottom: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
-        li span { flex-grow: 1; }
-        .actions button { margin-left: 0.5em; }
+        li span { flex-grow: 1; word-break: break-word; }
+        .actions button {
+            margin-left: 0.5em;
+            width: auto;
+            padding: 0.3em 0.6em;
+            cursor: pointer;
+        }
+        .actions button.edit { background: #ffc107; border: none; }
+        .actions button.delete { background: #dc3545; color: white; border: none; }
     </style>
 </head>
 <body>
 
 <h1>CRM con IndexedDB - Proyecto para alumnos</h1>
 
-<form id="client-form" autocomplete="off">
+<form id="client-form" autocomplete="off" novalidate>
+    <input type="hidden" id="clientId">
+
     <label>Nombre completo:</label>
     <input id="name" name="name" type="text" placeholder="Nombre completo" required>
-    <!-- TODO: Añadir validación en evento 'onblur' usando expresiones regulares -->
-    
+
     <label>Email:</label>
     <input id="email" name="email" type="email" placeholder="ejemplo@dominio.com" required>
-    <!-- TODO: Añadir validación en evento 'onblur' usando expresiones regulares -->
-    
+
     <label>Teléfono:</label>
     <input id="phone" name="phone" type="text" placeholder="123-456-7890" required>
-    <!-- TODO: Añadir validación en evento 'onblur' usando expresiones regulares -->
 
     <button id="add-btn" type="submit" disabled>
         Agregar Cliente
     </button>
-    <!-- TODO: Habilitar botón solo si todos los campos son válidos -->
+    <button type="button" id="cancel-btn" style="display:none;">
+        Cancelar Edición
+    </button>
 </form>
 
 <h2>Listado de Clientes</h2>
 <ul id="client-list">
-    <!-- TODO: Mostrar datos almacenados en IndexedDB dinámicamente -->
 </ul>
 
 <script src="js/crm-indexeddb.js"></script>
 
 </body>
 </html>
-
